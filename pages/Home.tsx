@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { profile } from "../data/profile";
 import { blogPosts } from "../data/blog";
-import { GitHubIcon } from "../components/icons/GitHubIcon";
 import HeroSection from "../components/HeroSection";
 
 import ProjectsSection from "../components/ProjectsSection";
