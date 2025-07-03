@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { profile } from "../data/profile";
+import { useLocale } from "../src/locale";
 
 const Footer: React.FC = () => {
+  const { t } = useLocale();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -11,31 +13,31 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8 items-start">
           {/* 左半分：ナビゲーションリンク */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Site Map</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("footer_sitemap")}</h3>
             <nav className="space-y-3">
               <Link
                 to="/about"
                 className="block text-white hover:text-yoden-orange transition-colors duration-200"
               >
-                私について
+                {t("nav_about")}
               </Link>
               <Link
                 to="/projects"
                 className="block text-white hover:text-yoden-orange transition-colors duration-200"
               >
-                プロジェクト内容
+                {t("projects_title")}
               </Link>
               <Link
                 to="/research"
                 className="block text-white hover:text-yoden-orange transition-colors duration-200"
               >
-                Researchs
+                {t("nav_research")}
               </Link>
               <Link
                 to="/blog"
                 className="block text-white hover:text-yoden-orange transition-colors duration-200"
               >
-                ブログ
+                {t("nav_blog")}
               </Link>
             </nav>
           </div>
@@ -45,7 +47,7 @@ const Footer: React.FC = () => {
 
           {/* 右半分：お問い合わせ */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Me</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("footer_contact")}</h3>
             <div className="space-y-4">
               <Link
                 to="/contact?type=work"

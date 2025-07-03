@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog";
 import HeroSection from "../components/HeroSection";
+import { useLocale } from "../src/locale";
 
 import ProjectsSection from "../components/ProjectsSection";
 import RecruitSection from "../components/RecruitSection";
 
 const Home: React.FC = () => {
+  const { t } = useLocale();
   return (
     <div>
       {/* ヒーローセクション */}
@@ -20,7 +22,7 @@ const Home: React.FC = () => {
       <section className="max-w-2xl mx-auto py-20 px-4 text-center">
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2 leading-tight">
-            身辺雑記
+            {t("home_blog")}
           </h2>
           <p className="text-sm text-gray-400 mb-10">Personal Blog</p>
         </div>
@@ -36,7 +38,7 @@ const Home: React.FC = () => {
               <div className="flex justify-center items-center gap-2 flex-wrap mb-2">
                 <span className="text-xs text-gray-600">{post.date}</span>
                 <span className="inline-block text-xs text-gray-800 no-underline py-1 px-2 border border-gray-800 rounded-sm">
-                  身辺雑記
+                  {t("home_blog")}
                 </span>
               </div>
               <p className="text-sm m-0 text-gray-800">{post.title}</p>
@@ -50,7 +52,7 @@ const Home: React.FC = () => {
         >
           <span className="absolute inset-0 bg-sky-600 transform origin-bottom-left scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
           <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
-            View more
+            {t("view_more")}
           </span>
         </Link>
       </section>

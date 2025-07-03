@@ -3,8 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { blogPosts } from "../data/blog";
+import { useLocale } from "../src/locale";
 
 const BlogPost: React.FC = () => {
+  const { t } = useLocale();
   const { postId } = useParams<{ postId: string }>();
   const post = blogPosts.find((p) => p.id === postId);
 
@@ -12,9 +14,9 @@ const BlogPost: React.FC = () => {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">投稿が見つかりません</h1>
+          <h1 className="text-3xl font-bold">{t("post_not_found")}</h1>
           <Link to="/blog" className="text-primary mt-4 inline-block">
-            &larr; ブログ一覧へ戻る
+            {t("back_to_blog")}
           </Link>
         </div>
       </div>
@@ -40,7 +42,7 @@ const BlogPost: React.FC = () => {
             to="/blog"
             className="font-semibold text-primary hover:text-primary-dark transition-colors"
           >
-            &larr; すべての投稿へ戻る
+            {t("back_to_all_posts")}
           </Link>
         </div>
       </article>

@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog";
+import { useLocale } from "../src/locale";
 
 const Blog: React.FC = () => {
+  const { t } = useLocale();
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-neutral-dark">ブログ</h1>
+          <h1 className="text-4xl font-extrabold text-neutral-dark">
+            {t("blog_title")}
+          </h1>
           <p className="mt-2 text-lg text-neutral-medium">
-            技術、研究、学生生活についての考えを綴ります。
+            {t("blog_description")}
           </p>
         </div>
         <div className="space-y-8">
@@ -28,17 +32,17 @@ const Blog: React.FC = () => {
                   to={`/blog/${post.id}`}
                   className="font-semibold text-primary hover:text-primary-dark transition-colors"
                 >
-                  続きを読む &rarr;
+                  {t("read_more")}
                 </Link>
               </div>
             ))
           ) : (
             <div className="text-center py-12">
               <h3 className="text-lg font-medium text-neutral-dark mb-2">
-                投稿がありません
+                {t("no_posts_title")}
               </h3>
               <p className="text-neutral-medium">
-                まだブログ投稿がありません。
+                {t("no_posts_desc")}
               </p>
             </div>
           )}

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { sendEmail, openMailClient } from "../src/utils/emailService";
+import { useLocale } from "../src/locale";
 
 const Contact: React.FC = () => {
+  const { t } = useLocale();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -11,7 +13,7 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setStatus("送信中...");
+    setStatus(t("contact_sending"));
 
     try {
       // EmailJSを使用してメール送信を試行
@@ -23,7 +25,7 @@ const Contact: React.FC = () => {
       });
 
       if (result.success) {
-        setStatus("メッセージが正常に送信されました。ありがとうございます！");
+        setStatus(t("contact_success"));
         setName("");
         setEmail("");
         setMessage("");
@@ -31,7 +33,7 @@ const Contact: React.FC = () => {
         // EmailJSが失敗した場合はmailtoにフォールバック
         console.warn("EmailJS failed, falling back to mailto:", result.error);
         openMailClient(name, email, message);
-        setStatus("メールクライアントが開きました。送信を完了してください。");
+        setStatus(t("contact_fallback"));
         setName("");
         setEmail("");
         setMessage("");
@@ -40,7 +42,7 @@ const Contact: React.FC = () => {
       console.error("Email sending error:", error);
       // エラーの場合もmailtoにフォールバック
       openMailClient(name, email, message);
-      setStatus("メールクライアントが開きました。送信を完了してください。");
+      setStatus(t("contact_fallback"));
       setName("");
       setEmail("");
       setMessage("");
@@ -54,10 +56,10 @@ const Contact: React.FC = () => {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-extrabold text-neutral-dark">
-            お問い合わせ
+            {t("contact_title")}
           </h1>
           <p className="mt-2 text-lg text-neutral-medium">
-            ご連絡をお待ちしております。以下のフォームからメッセージを送信してください。
+            {t("contact_description")}
           </p>
         </div>
         <div className="bg-white p-8 border border-gray-200">
@@ -67,7 +69,7 @@ const Contact: React.FC = () => {
                 htmlFor="name"
                 className="block text-sm font-bold text-black mb-2"
               >
-                お名前 <span className="text-red-500">*</span>
+                {t("contact_name")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -86,7 +88,7 @@ const Contact: React.FC = () => {
                 htmlFor="email"
                 className="block text-sm font-bold text-black mb-2"
               >
-                メールアドレス <span className="text-red-500">*</span>
+                {t("contact_email")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
@@ -105,7 +107,7 @@ const Contact: React.FC = () => {
                 htmlFor="message"
                 className="block text-sm font-bold text-black mb-2"
               >
-                メッセージ <span className="text-red-500">*</span>
+                {t("contact_message")} <span className="text-red-500">*</span>
               </label>
               <textarea
                 id="message"
@@ -149,7 +151,7 @@ const Contact: React.FC = () => {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                       </svg>
-                      送信中...
+                      {t("contact_sending")}
                     </>
                   ) : (
                     <>
@@ -167,7 +169,7 @@ const Contact: React.FC = () => {
                           d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                         />
                       </svg>
-                      メッセージを送信
+                      {t("contact_send")}
                     </>
                   )}
                 </span>
@@ -178,18 +180,16 @@ const Contact: React.FC = () => {
           {status && (
             <div
               className={`mt-6 p-4 border-l-4 ${
-                status.includes("正常に送信") ||
-                status.includes("ありがとうございます")
+                status === t("contact_success")
                   ? "bg-green-50 border-green-400 text-green-700"
-                  : status.includes("メールクライアント")
+                  : status === t("contact_fallback")
                   ? "bg-blue-50 border-blue-400 text-blue-700"
                   : "bg-red-50 border-red-400 text-red-700"
               }`}
             >
               <div className="flex">
                 <div className="flex-shrink-0">
-                  {status.includes("正常に送信") ||
-                  status.includes("ありがとうございます") ? (
+                  {status === t("contact_success") ? (
                     <svg
                       className="h-5 w-5 text-green-400"
                       xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@ const Contact: React.FC = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  ) : status.includes("メールクライアント") ? (
+                  ) : status === t("contact_fallback") ? (
                     <svg
                       className="h-5 w-5 text-blue-400"
                       xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +237,7 @@ const Contact: React.FC = () => {
           <div className="mt-8 pt-6 border-t border-gray-200">
             <div className="text-center">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                その他の連絡方法
+                {t("contact_direct")}
               </h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -257,7 +257,7 @@ const Contact: React.FC = () => {
                       d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  メールで直接連絡
+                  {t("contact_email_direct")}
                 </a>
                 <a
                   href="https://github.com/HAYAMA1005"
@@ -276,7 +276,7 @@ const Contact: React.FC = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  GitHubで確認
+                  {t("contact_github")}
                 </a>
               </div>
             </div>

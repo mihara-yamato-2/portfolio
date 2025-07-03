@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLocale } from "../src/locale";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { t } = useLocale();
+
   const navLinks = [
-    { name: "私について", path: "/about" },
-    { name: "プロジェクト", path: "/projects" },
-    { name: "研究活動", path: "/research" },
-    { name: "ブログ", path: "/blog" },
-    { name: "お問い合わせ", path: "/contact" },
+    { name: t("nav_about"), path: "/about" },
+    { name: t("nav_projects"), path: "/projects" },
+    { name: t("nav_research"), path: "/research" },
+    { name: t("nav_blog"), path: "/blog" },
+    { name: t("nav_contact"), path: "/contact" },
   ];
 
   const linkClasses =
@@ -25,11 +29,11 @@ const Header: React.FC = () => {
               to="/"
               className="text-2xl font-bold text-yoden-blue hover:text-primary-dark transition-colors"
             >
-              TOP
+              {t("nav_top")}
             </NavLink>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-stretch h-16">
+          <div className="hidden md:flex items-stretch h-16">
+            <div className="ml-10 flex items-stretch">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.name}
@@ -42,6 +46,7 @@ const Header: React.FC = () => {
                 </NavLink>
               ))}
             </div>
+            <LanguageSwitcher />
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -107,6 +112,7 @@ const Header: React.FC = () => {
                 {link.name}
               </NavLink>
             ))}
+            <LanguageSwitcher />
           </div>
         </div>
       )}

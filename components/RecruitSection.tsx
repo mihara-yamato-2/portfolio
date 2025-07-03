@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLocale } from "../src/locale";
 
 const RecruitSection: React.FC = () => {
+  const { t } = useLocale();
   return (
     <section className="py-24" style={{ backgroundColor: "#F2F6F8" }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,7 +33,7 @@ const RecruitSection: React.FC = () => {
             >
               <span className="absolute inset-0 bg-sky-600 transform origin-bottom-left scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
-                View more
+                {t("view_more")}
               </span>
             </Link>
           </div>

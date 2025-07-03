@@ -2,9 +2,11 @@ import React from "react";
 import { projects } from "../data/projects";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLocale } from "../src/locale";
 
 const ProjectsSection: React.FC = () => {
   const featuredProjects = projects.slice(0, 3);
+  const { t } = useLocale();
 
   return (
     <section className="py-24 bg-white">
@@ -50,7 +52,7 @@ const ProjectsSection: React.FC = () => {
                 >
                   <span className="absolute inset-0 bg-sky-600 transform origin-bottom-left -translate-x-full w-full h-full transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
                   <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
-                    View more
+                    {t("view_more")}
                   </span>
                 </Link>
               </div>
