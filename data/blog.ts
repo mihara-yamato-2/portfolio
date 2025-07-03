@@ -50,7 +50,7 @@ export const blogPosts: BlogPost[] = [
 
 ### 出典情報
 
-> **媒体**: [Bloomberg](https://www.bloomberg.co.jp/news/articles/2025-07-03/SYT27QDWLU6800?srnd=cojp-v2)  
+媒体: [Bloomberg](https://www.bloomberg.co.jp/news/articles/2025-07-03/SYT27QDWLU6800?srnd=cojp-v2)  
 
 ### 記事要約
 
