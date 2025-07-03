@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { profile } from "../data/profile";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
